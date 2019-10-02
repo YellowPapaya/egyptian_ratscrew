@@ -1,2 +1,2 @@
-# egyptian-ratscrew
+# egyptian_ratscrew
 Egyptian Ratscrew, now in Python!
