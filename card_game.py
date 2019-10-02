@@ -1,7 +1,7 @@
 #import our modules
 import random
 import time
-import socket
+from msvcrt import getwch
 from sys import exit
 
 #together this is every card in a full 52 deck excluding jokers
@@ -27,9 +27,27 @@ If you are too late to press the enter button, the computer take all the cards s
 If you press the enter button, you take all the cards shown in the terminal.
 The first person to gain all the cards is the winner.''')
 
+#class to disable keyboard input
+class keyboardDisable:
+	def __init__(self):
+		self.disable = False
+	
+	def start(self):
+		self.disable = True
+	
+	def stop(self):
+		self.disable = False
+		
+	def __call__(self):
+		while self.disable:
+			getwch()
+		
+disable_keyboard = keyboardDisable()
+
 #shuffle/split the deck
 
 print("Please wait, shuffling deck. ")
+disable_keyboard.start()
 time.sleep(random.randint(1, 5))
 random.shuffle(full_deck)
 
@@ -38,6 +56,8 @@ time.sleep(random.randint(5, 15))
 player_deck = full_deck[:26]
 computer_deck = full_deck[:-26]
 print("Done shuffling and splitting.")
+
+disable_keyboard.stop
 
 #adjust computer difficulty/reaction time
 while True:
@@ -75,4 +95,4 @@ player_turn = random.randint(0, 1)
 
 #now the actual game!
 while len(player_deck) > 0 and len(computer_deck) > 0:
-    if player_turn == 
+    pass
